@@ -1,0 +1,36 @@
+﻿@model List<Nhom4_DoAnWeb_CHDT.Models.Giohang>
+
+<div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        <i class="fa fa-shopping-cart"></i>
+        <span>Your Cart</span>
+        <div class="qty">@ViewBag.Tongsoluong</div>
+    </a>    
+    <div class="cart-dropdown">
+        <div class="cart-list">
+                @foreach (var item in Model)
+                {
+                    <div class="product-widget">
+
+                        <div class="product-img">
+                            <img src="@item.hinh" alt="/">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-name">@Html.DisplayFor(modelItem => item.tenDT)></h3>
+                            <h4 class="product-price"><span class="qty">@item.isoluong x</span>@item.giaban.ToString("C") VNĐ</h4>
+                        </div>
+                        <button class="delete"><i class="fa fa-close"></i></button>
+                    </div>
+                }
+        </div>
+        <div class="cart-summary">
+            <small>Tổng số lượng  @ViewBag.Tongsoluong</small>
+            <h5>Tổng giá tiền:  @ViewBag.Tongtien</h5>
+        </div>
+        <div class="cart-btns">
+            @Html.ActionLink("Xóa giỏ hàng", "Clear", "GioHang")
+            @Html.ActionLink("Xem giỏ hàng", "GioHang", "GioHang")
+
+        </div>
+    </div>
+</div>

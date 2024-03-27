@@ -1,0 +1,56 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblNHACUNGCAP
+
+@{
+    ViewBag.Title = "Xóa Nhà cung cấp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa Nhà Cung Cấp</h2>
+
+<h3>Chắc chắn muốn xóa Nhà Cung Cấp này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Nhà Cung Cấp: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENNCC)
+        </dd>
+
+        <dt>
+            Địa chỉ: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+
+        <dt>
+            Điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIENTHOAI)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+             @Html.ActionLink("Quay lại", "danh_sach") |
+            <input style="margin-left:30px" type="submit" value="Xóa" class="btn btn-default" />
+        </div>
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblNHAPKHO
+@{
+    ViewBag.Title = "Xóa phiếu nhập kho";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Xóa phiếu nhập kho</h2>
+        <h3>Chắc chắn muốn xóa phiếu nhập kho này?</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <p>Mã hóa đơn: @Model.MAPNK</p>
+                <p>Ngày lập: @Model.NGAYNHAP</p>
+                <p>Mã khách hàng: @Model.MANCC</p>
+                <p>Mã nhân viên: @Model.MANV</p>
+                <p>Tổng tiền: @Model.TONGTG</p>
+            </div>
+            @if (ViewBag.ctnk != null && ViewBag.ctnk.Count > 0)
+            {
+                <div class="col-md-6">
+                    <h3>Chi tiết phiếu nhập kho:</h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th scope="col" class="text-center">Mã điện thoại</th>
+                            <th scope="col" class="text-center">Số lượng</th>
+                            <th scope="col" class="text-center">Đơn giá</th>
+                        </tr>
+                        @foreach (var item in ViewBag.ctnk)
+                        {
+                            <tr>
+                                <td class="text-center">@item.MADT</td>
+                                <td class="text-center">@item.SL</td>
+                                <td class="text-center">@item.GIANHAP</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Quay lại", "danh_sach_NK", "NhapKho") |
+        <input style="margin-left:30px" type="submit" value="Xóa" class="btn btn-default" />
+    </div>
+}

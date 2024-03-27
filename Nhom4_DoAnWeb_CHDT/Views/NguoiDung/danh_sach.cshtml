@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblTAIKHOAN>
+@{
+    ViewBag.Title = "Danh sách Tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh Sách Tài Khoản</h2>
+<p>
+    @Html.ActionLink("Thêm tài khoản mới cho nhân viên", "DangKy_NV", null, new { @class = "btn btn-warning" })
+</p>
+<table border="1px">
+    <tr style="height:40px">
+        <th width="100" style="text-align:center">Tài Khoản</th>
+        <th width="30%" style="text-align:center">Mật Khẩu</th>
+        <th width="45%" style="text-align:center">Danh mục</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="height:40px">
+            <td style="text-align:center">@item.userID</td>
+            <td style="text-align:center">@item.password</td>
+            <td style="text-align:center; font-size:20px">
+                <a href="@Url.Action("xoa_TK", new { id = item.userID })" title="Delete">
+                    <img src="~/Content/images/delete-icon.png" alt="Edit" width="19px" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<style>
+    a:hover img {
+        position: relative;
+        top: -3px;
+    }
+
+    img {
+        vertical-align: text-bottom;
+    }
+</style>

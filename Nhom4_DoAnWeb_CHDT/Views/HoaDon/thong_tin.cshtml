@@ -1,0 +1,60 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblHOADON
+@{
+    ViewBag.Title = "Thông tin hóa đơn";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-center">Thông tin hóa đơn</h2>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <p>Mã hóa đơn: @Model.MAHD</p>
+                <p>Ngày lập: @Model.NGAYLAP</p>
+                <p>Mã khách hàng: @Model.MAKH</p>
+                <p>Mã nhân viên: @Model.MANV</p>
+                <p>Hạn bảo hành: @Model.HANBAOHANH</p>
+                <p>Tổng tiền: @Model.TONGTG</p>
+            </div>
+            @if (ViewBag.cthd != null && ViewBag.cthd.Count > 0)
+            {
+                <div class="col-md-6">
+                    <h3>Chi tiết hóa đơn:</h3>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th scope="col" class="text-center">Mã điện thoại</th>
+                            <th scope="col" class="text-center">Số lượng</th>
+                            <th scope="col" class="text-center">Đơn giá</th>
+                        </tr>
+                        @foreach (var item in ViewBag.cthd)
+                        {
+                            <tr>
+                                <td class="text-center">@item.MADT</td>
+                                <td class="text-center">@item.SLMUA</td>
+                                <td class="text-center">@item.GIABAN</td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<br />
+@using Nhom4_DoAnWeb_CHDT.Models
+@{
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+}
+@if (tk.role == "QT")
+{
+    <div class="col-md-12">
+        @Html.ActionLink("Quay lại", "danh_sach_HDQT", "HoaDon")
+    </div>
+}
+else
+{
+    <div class="col-md-12">
+        @Html.ActionLink("Quay lại", "danh_sach_HD", "HoaDon")
+    </div>
+}
+

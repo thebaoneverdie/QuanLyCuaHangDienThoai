@@ -1,0 +1,171 @@
+﻿body {
+    padding-top: 0;
+}
+
+.header {
+    display: flex;
+ 
+    height: 56px;
+    position: relative;
+    width: 100%;
+}
+
+.logo img {
+    margin-left: 30px;
+    width: 200px;
+    height: 56px;
+}
+
+    .logo img:hover {
+        cursor: pointer;
+    }
+
+.search-header p {
+    display: flex;
+    position: absolute;
+    right: 70px;
+    top: 10px;
+}
+
+.search__dt {
+    width: 400px;
+    margin-right: 20px
+}
+
+@media screen and (max-width: 686px) {
+    .search__dt {
+        width: 200px;
+    }
+
+    .search-header p {
+        right: 40px;
+    }
+}
+
+.banner {
+    display: flex;
+}
+
+.banner__left img {
+    height: 298px;
+    width: 98%;
+    border: 1px solid #cccc;
+}
+
+.banner__left {
+    width: 70%;
+    display: block;
+}
+
+.banner__right {
+    display: block;
+    width: 30%;
+}
+
+    .banner__right img {
+        height: 147px;
+        width: 98%;
+        border: 1px solid #cccc;
+    }
+
+.banner__last {
+    margin-top: 4px;
+}
+
+.navbar {
+    margin-bottom: 3px;
+}
+
+.title-sp {
+    display: flex;
+}
+
+.more {
+    position: absolute;
+    right: 70px;
+    font-size: 16px;
+    transform: translate(-50px, 30px);
+    text-decoration: underline;
+}
+
+@media screen and (min-width:1330px) {
+    .more {
+        right: 180px;
+    }
+}
+
+.footer {
+    background-color: #242424;
+    color: #ccc;
+    width: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.foot__menu {
+    display: flex;
+}
+
+.info {
+    width: 33%;
+    margin-left: 30px;
+}
+
+    .info span, .support h5 {
+        text-decoration: underline;
+        font-size: 20px;
+        margin: 16px 0;
+    }
+
+    .info h3 {
+        font-size: 20px;
+    }
+
+.line {
+    border-left: 1.5px solid #ccc;
+    width: 2%;
+}
+
+.support {
+    width: 28%;
+}
+
+.phone {
+    color: #fff;
+}
+
+.foot-menu, .followus {
+    width: 17%;
+    text-align: center;
+}
+
+    .foot-menu ul, .followus ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .foot-menu li, .followus li {
+        padding: 5px 0;
+    }
+
+    .foot-menu a, .followus a, .footer p {
+        font-size: 18px;
+        text-decoration: none;
+        color: #ccc;
+    }
+
+.footer a:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.line-end {
+    margin: 20px auto;
+    width: 40%;
+    border: 1px solid #ccc;
+}
+
+.foot--end {
+    padding-bottom: 5px;
+    text-align: center;
+}

@@ -1,0 +1,50 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblNHANVIEN
+
+@{
+    ViewBag.Title = "Thông tin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin Nhân Viên</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Nhân Viên:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENNV)
+        </dd>
+
+        <dt>
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+
+        <dt>
+            Điện Thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIENTHOAI)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "sua_thong_tin", new { id = Model.MANV }) |
+    @Html.ActionLink("Quay lại", "danh_sach")
+</p>

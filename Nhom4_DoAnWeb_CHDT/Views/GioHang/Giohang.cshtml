@@ -1,0 +1,160 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.Giohang>
+@{
+    ViewBag.Title = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Nhom4_DoAnWeb_CHDT.Models
+@{
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+}
+<h2>Giỏ hàng</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên điện thoại:
+        </th>
+        <th>
+            Hình:
+        </th>
+        @if (tk != null)
+        {
+            if (tk.role == "QT")
+            {
+                <th>
+                    Giá nhập:
+                </th>
+                <th>
+                    Số lượng:
+                </th>
+                <th>
+                    Tổng tiền nhập:
+                </th>
+            }
+            else
+            {
+                <th>
+                    Giá bán:
+                </th>
+                <th>
+                    Số lượng:
+                </th>
+                <th>
+                    Tổng tiền:
+                </th>
+            }
+        }
+        else
+        {
+            <th>
+                Giá bán:
+            </th>
+            <th>
+                Số lượng:
+            </th>
+            <th>
+                Tổng tiền:
+            </th>
+        }
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.tenDT)
+            <td>
+                <img src="@item.hinh" width="180" />
+            </td>
+
+            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.maDT }))
+            {
+
+                if (tk != null)
+                {
+
+                    if (tk.role == "QT")
+                    {
+                        <td>
+                            @{
+                                var formattedValue = item.gianhap.ToString("C");
+                            }
+                            @Html.DisplayFor(_ => formattedValue)
+                        </td>
+                        <td>
+                            <input type="number" min="1" max="" id="txtSoLg" name="txtSoLg" value="@item.isoluong" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dTienNhap)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                        @{
+                            var formattedValue = item.giaban.ToString("C");
+                        }
+                        @Html.DisplayFor(_ => formattedValue)
+                        </td>
+                        <td>
+                            <input type="number" min="1" max="" id="txtSoLg" name="txtSoLg" value="@item.isoluong" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.dThanhtien)
+                        </td>
+                    }
+                }
+                else
+                {
+                        <td>
+                            @{
+                                var formattedValue = item.giaban.ToString("C");
+                            }
+                            @Html.DisplayFor(_ => formattedValue)
+                        </td>
+                    <td>
+                        <input type="number" min="1" max="" id="txtSoLg" name="txtSoLg" value="@item.isoluong" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dThanhtien)
+                    </td>
+                }
+                <td>
+                    <a href="@Url.Action("thong_tin", "DienThoai", new {@id = item.maDT})">Chi tiết</a> |
+                    @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.maDT }) |
+                </td>
+                <td>
+                    <input type="submit" value="Cập nhật" class="btn =btn-success" />
+                </td>
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:left; color:red">
+        <td colspan="2" id="sp">Số loại điện thoại: @ViewBag.Tongsoluongsanpham</td>
+        <td colspan="2" id="sa">Số lượng điện thoại: @ViewBag.Tongsoluong</td>
+        @if (tk != null && tk.role == "QT")
+        {
+            <td colspan="4" id="ttnp">Tổng tiền: @String.Format("{0:0:0}", ViewBag.TongtienNhap) VNĐ</td>
+        }
+        else
+        {
+            <td colspan="4" id="tt">Tổng tiền: @String.Format("{0:0:0}", ViewBag.Tongtien) VNĐ</td>
+        }
+    </tr>
+    <tr style="font-weight:bold; text-align:right; color:blue">
+        <td colspan="5">@Html.ActionLink("Xóa giỏ hàng", "XoaTatCaGioHang")</td>
+    </tr>
+    <tr style="font-weight:bold; text-align:right; color:yellow">
+        <td colspan="5">
+            @Html.ActionLink("Đặt hàng", "ThongTinDatHang", "GioHang")
+        </td>
+    </tr>
+</table>
+<style>
+    a {
+        font-size: 19px;
+    }
+</style>

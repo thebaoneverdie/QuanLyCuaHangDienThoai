@@ -1,0 +1,253 @@
+﻿@*@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.Giohang>
+
+    @{
+        ViewBag.Title = "Đặt hàng";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <h2>Đặt hàng</h2>
+
+    <table class="table">
+        <tr>
+            <th>
+                Tên điện thoại:
+            </th>
+            <th>
+                Hình:
+            </th>
+            <th>
+                Giá bán:
+            </th>
+            <th>
+                Số lượng:
+            </th>
+            <th>
+                Thành tiền:
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenDT)
+                </td>
+                <td>
+                    <img src="@item.hinh" width="180" />
+                </td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.maDT }))
+                {
+                    <td>
+                        @String.Format("{0:0:0}", item.giaban) VNĐ
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isoluong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dThanhtien)
+                    </td>
+                }
+            </tr>
+        }
+        <tr style="font-weight:bold; text-align:right; color:red">
+            <td colspan="3" id="sp">Số loại điện thoại: @ViewBag.Tongsoluongsanpham</td>
+            <td colspan="4" id="sa">Số lượng điện thoại: @ViewBag.Tongsoluong</td>
+            <td colspan="5" id="tt">Tổng tiền: @String.Format("{0:0:0}", ViewBag.Tongtien) VNĐ</td>
+        </tr>
+        <tr style="font-weight: bold; text-align:right">
+            <td colspan="6">@Html.ActionLink("Trở về giỏ hàng", "GioHang", "GioHang")</td>
+        </tr>
+    </table>
+    @using Nhom4_DoAnWeb_CHDT.Models
+    <h2 style="text-align:center">Đặt hàng</h2>
+    @{
+        tblKHACHHANG kh = (tblKHACHHANG)Session["KhachHang"];
+        tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+        Giohang gh = new Giohang();
+    }
+    <table align="center">
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true)
+            <tr style="height:40px">
+                <td>Họ tên khách hàng: </td>
+                <td style="font-weight: bold">@kh.TENKH</td>
+            </tr>
+            <tr style="height:40px">
+                <td>Địa chỉ: </td>
+                <td style="font-weight: bold">@kh.DIACHI</td>
+            </tr>
+            <tr style="height:40px">
+                <td>Điện thoại: </td>
+                <td style="font-weight: bold">@kh.DIENTHOAI</td>
+            </tr>
+            <tr style="height:40px">
+                <td>Email: </td>
+                <td style="font-weight: bold">@kh.EMAIL</td>
+            </tr>
+            <tr style="height:40px">
+                <td>Ngày đặt: </td>
+                <td style="font-weight: bold">@DateTime.Now.ToShortDateString()</td>
+            </tr>
+            <tr style="height:40px">
+                <td>Hạn bảo hành: </td>
+                <td style="font-weight: bold">@DateTime.Now.AddYears(1).ToShortDateString()</td>
+            </tr>
+            if (tk.role == "NV")
+            {
+                <tr style="height:40px">
+                    <td>Nhân viên: </td>
+                    <td style="font-weight: bold">
+                        @Html.DropDownList("MANV", new SelectList(gh.ListNV, "MANV", "TENNV"))
+
+                    </td>
+                </tr>
+            }
+            <form action="@Url.Action("DatHang", "GioHang")" method="post">
+
+                <table align="center">
+                    <tr>
+                        <td>Phương thức thanh toán:</td>
+                        <td>
+                            <select class="form-control" id="thanh-toan" name="thanh-toan">
+                                <option value="tien-mat">Tiền mặt</option>
+                                <option value="momo">Momo</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-primary" style="margin-top:30px">Xác nhận</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+        }
+    </table>*@
+@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.Giohang>
+
+@{
+    ViewBag.Title = "Đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Nhom4_DoAnWeb_CHDT.Models
+<h2 style="text-align:center">Đặt hàng</h2>
+@{
+    tblKHACHHANG kh = (tblKHACHHANG)Session["KhachHang"];
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+    Giohang gh = new Giohang();
+}
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+                <div class="billing-details">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        <tr style="height:40px">
+                            <td>Họ tên khách hàng: </td>
+                            <td style="font-weight: bold">@kh.TENKH</td>
+                        </tr>
+                        <br />
+                        <tr style="height:40px">
+                            <td>Địa chỉ: </td>
+                            <td style="font-weight: bold">@kh.DIACHI</td>
+                        </tr>
+                        <br />
+                        <tr style="height:40px">
+                            <td>Điện thoại: </td>
+                            <td style="font-weight: bold">@kh.DIENTHOAI</td>
+                        </tr>
+                        <br />
+                        <tr style="height:40px">
+                            <td>Email: </td>
+                            <td style="font-weight: bold">@kh.EMAIL</td>
+                        </tr>
+                        <br />
+                        <tr style="height:40px">
+                            <td>Ngày đặt: </td>
+                            <td style="font-weight: bold">@DateTime.Now.ToShortDateString()</td>
+                        </tr>
+                        <br />
+                        <tr style="height:40px">
+                            <td>Hạn bảo hành: </td>
+                            <td style="font-weight: bold">@DateTime.Now.AddYears(1).ToShortDateString()</td>
+                        </tr>
+
+                        if (tk.role == "NV")
+                        {
+                            <tr style="height:40px">
+                                <td>Nhân viên: </td>
+                                <td style="font-weight: bold">
+                                    @Html.DropDownList("MANV", new SelectList(gh.ListNV, "MANV", "TENNV"))
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                </div>
+
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Your Order</h3>
+                </div>
+
+
+                <div class="order-summary">
+                    @foreach (var item in Model)
+                    {
+                        <div class="order-col">
+                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            <div class="order-col">
+                                <div>  @Html.DisplayFor(modelItem => item.tenDT)</div>
+                                <div> @String.Format("{0:0:0}", item.giaban) VNĐ</div>
+                                <div> @Html.DisplayFor(modelItem => item.isoluong)</div>
+                            </div>
+                        </div>
+                    }
+                    @*<div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong class="order-total"> @Html.DisplayFor(modelItem => item.dThanhtien)</strong></div>
+                        </div>*@
+                </div>
+                <form action="@Url.Action("DatHang", "GioHang")" method="post">
+
+
+                    <input type="radio" id="thanh-toan-tien-mat" name="phuongThucThanhToan" value="tien-mat">
+                    <label for="thanh-toan-tien-mat">Tiền mặt</label>
+                    <br>
+                    <input type="radio" id="thanh-toan-momo" name="phuongThucThanhToan" value="momo">
+                    <label for="thanh-toan-momo">Momo</label>
+
+
+
+                    <button type="submit" class="primary-btn order-submit">Thanh Toán</button>
+
+                </form>
+
+
+                <!-- /Order Details -->
+                <!-- /row -->
+                <!-- /container -->
+            </div>
+        </div>
+    </div>
+</div>
+
+

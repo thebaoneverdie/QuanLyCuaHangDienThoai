@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblNHACUNGCAP>
+@{
+    ViewBag.Title = "Nhà cung cấp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh Sách Nhà Cung Cấp</h2>
+<p>
+    @Html.ActionLink("Thêm Nhà Cung Cấp mới", "them_moi", null, new { @class = "btn btn-warning" })
+</p>
+@using (Html.BeginForm("tim_kiem", "NCC", FormMethod.Get))
+{
+    <p>
+        <input type="Text" class="form-control col-md-10 " name="searchName" placeholder="Nhập tên Nhà Cung Cấp cần tìm">
+        <input type="submit" value="Search" class="btn btn-info" />
+    </p>
+}
+<table border="1px">
+    <tr>
+        <th width="130" style="text-align:center">Mã Nhà Cung Cấp</th>
+        <th width="150" style="text-align:center">Tên Nhà Cung Cấp</th>
+        <th width="230" style="text-align:center">Địa chỉ</th>
+        <th width="100" style="text-align:center">Điện Thoại</th>
+        <th width="190" style="text-align:center">Email</th>
+        <th width="160"></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr style="margin:10px 0">
+            <td style="text-align:center">@item.MANCC</td>
+            <td style="text-align:center">@item.TENNCC</td>
+            <td style="text-align:center">@item.DIACHI</td>
+            <td style="text-align:center">@item.DIENTHOAI</td>
+            <td style="text-align:center">@item.EMAIL</td>
+            <td style="text-align:center; font-size:20px">
+                <a href="@Url.Action("sua_thong_tin", new { id = item.MANCC })" title="Edit">
+                    <img src="~/Content/images/edit-icon.png" alt="Edit" width="20px" />
+                </a> |
+                <a href="@Url.Action("thong_tin", new { id = item.MANCC })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Edit" width="24px" />
+                </a> |
+                <a href="@Url.Action("xoa_NCC", new { id = item.MANCC })" title="Delete">
+                    <img src="~/Content/images/delete-icon.png" alt="Edit" width="21px" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<style>
+    a:hover img {
+        position: relative;
+        top: -3px;
+    }
+
+    img {
+        vertical-align: text-bottom;
+    }
+</style>

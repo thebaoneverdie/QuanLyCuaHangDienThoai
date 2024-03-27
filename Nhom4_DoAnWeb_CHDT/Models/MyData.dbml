@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CHDT" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=LAPTOP-FF7DQ9AR\SQLEXPRESS;Initial Catalog=WesiteDienThoai;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="WebsiteDienThoaiConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblCTPNHAPKHO" Member="tblCTPNHAPKHOs">
+    <Type Name="tblCTPNHAPKHO">
+      <Column Name="MAPNK" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MADT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SL" Type="System.Int32" DbType="Int" CanBeNull="false" />
+      <Column Name="GIANHAP" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="tblDIENTHOAI_tblCTPNHAPKHO" Member="tblDIENTHOAI" ThisKey="MADT" OtherKey="MADT" Type="tblDIENTHOAI" IsForeignKey="true" />
+      <Association Name="tblNHAPKHO_tblCTPNHAPKHO" Member="tblNHAPKHO" ThisKey="MAPNK" OtherKey="MAPNK" Type="tblNHAPKHO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblCTHD" Member="tblCTHDs">
+    <Type Name="tblCTHD">
+      <Column Name="MAHD" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MADT" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="SLMUA" Type="System.Int32" DbType="Int" CanBeNull="false" />
+      <Column Name="GIABAN" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="tblDIENTHOAI_tblCTHD" Member="tblDIENTHOAI" ThisKey="MADT" OtherKey="MADT" Type="tblDIENTHOAI" IsForeignKey="true" />
+      <Association Name="tblHOADON_tblCTHD" Member="tblHOADON" ThisKey="MAHD" OtherKey="MAHD" Type="tblHOADON" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblDIENTHOAI" Member="tblDIENTHOAIs">
+    <Type Name="tblDIENTHOAI">
+      <Column Name="MADT" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENDT" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="HINH" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="GIAMUA" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="GIABAN" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="MOTA" Type="System.String" DbType="NVarChar(2000) NOT NULL" CanBeNull="false" />
+      <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SLTON" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="tblDIENTHOAI_tblCTPNHAPKHO" Member="tblCTPNHAPKHOs" ThisKey="MADT" OtherKey="MADT" Type="tblCTPNHAPKHO" />
+      <Association Name="tblDIENTHOAI_tblCTHD" Member="tblCTHDs" ThisKey="MADT" OtherKey="MADT" Type="tblCTHD" />
+      <Association Name="tblLOAIDIENTHOAI_tblDIENTHOAI" Member="tblLOAIDIENTHOAI" ThisKey="MALOAI" OtherKey="MALOAI" Type="tblLOAIDIENTHOAI" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblHOADON" Member="tblHOADONs">
+    <Type Name="tblHOADON">
+      <Column Name="MAHD" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NGAYLAP" Type="System.DateTime" DbType="Date" CanBeNull="false" />
+      <Column Name="TONGTG" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="HANBAOHANH" Type="System.DateTime" DbType="Date" CanBeNull="false" />
+      <Column Name="MAKH" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MANV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblHOADON_tblCTHD" Member="tblCTHDs" ThisKey="MAHD" OtherKey="MAHD" Type="tblCTHD" />
+      <Association Name="tblKHACHHANG_tblHOADON" Member="tblKHACHHANG" ThisKey="MAKH" OtherKey="MAKH" Type="tblKHACHHANG" IsForeignKey="true" />
+      <Association Name="tblNHANVIEN_tblHOADON" Member="tblNHANVIEN" ThisKey="MANV" OtherKey="MANV" Type="tblNHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblKHACHHANG" Member="tblKHACHHANGs">
+    <Type Name="tblKHACHHANG">
+      <Column Name="MAKH" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENKH" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(200)" CanBeNull="true" />
+      <Association Name="tblKHACHHANG_tblHOADON" Member="tblHOADONs" ThisKey="MAKH" OtherKey="MAKH" Type="tblHOADON" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblLOAIDIENTHOAI" Member="tblLOAIDIENTHOAIs">
+    <Type Name="tblLOAIDIENTHOAI">
+      <Column Name="MALOAI" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENLOAI" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="tblLOAIDIENTHOAI_tblDIENTHOAI" Member="tblDIENTHOAIs" ThisKey="MALOAI" OtherKey="MALOAI" Type="tblDIENTHOAI" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNHACUNGCAP" Member="tblNHACUNGCAPs">
+    <Type Name="tblNHACUNGCAP">
+      <Column Name="MANCC" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENNCC" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="NVarChar(11)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="tblNHACUNGCAP_tblNHAPKHO" Member="tblNHAPKHOs" ThisKey="MANCC" OtherKey="MANCC" Type="tblNHAPKHO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNHANVIEN" Member="tblNHANVIENs">
+    <Type Name="tblNHANVIEN">
+      <Column Name="MANV" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TENNV" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="DIACHI" Type="System.String" DbType="NVarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="DIENTHOAI" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="EMAIL" Type="System.String" DbType="VarChar(200) NOT NULL" CanBeNull="false" />
+      <Association Name="tblNHANVIEN_tblHOADON" Member="tblHOADONs" ThisKey="MANV" OtherKey="MANV" Type="tblHOADON" />
+      <Association Name="tblNHANVIEN_tblNHAPKHO" Member="tblNHAPKHOs" ThisKey="MANV" OtherKey="MANV" Type="tblNHAPKHO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblNHAPKHO" Member="tblNHAPKHOs">
+    <Type Name="tblNHAPKHO">
+      <Column Name="MAPNK" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NGAYNHAP" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="TONGTG" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="MANV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MANCC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tblNHAPKHO_tblCTPNHAPKHO" Member="tblCTPNHAPKHOs" ThisKey="MAPNK" OtherKey="MAPNK" Type="tblCTPNHAPKHO" />
+      <Association Name="tblNHACUNGCAP_tblNHAPKHO" Member="tblNHACUNGCAP" ThisKey="MANCC" OtherKey="MANCC" Type="tblNHACUNGCAP" IsForeignKey="true" />
+      <Association Name="tblNHANVIEN_tblNHAPKHO" Member="tblNHANVIEN" ThisKey="MANV" OtherKey="MANV" Type="tblNHANVIEN" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblTAIKHOAN" Member="tblTAIKHOANs">
+    <Type Name="tblTAIKHOAN">
+      <Column Name="userID" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="role" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

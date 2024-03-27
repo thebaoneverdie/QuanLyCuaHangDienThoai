@@ -1,0 +1,31 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblLOAIDIENTHOAI
+
+@{
+    ViewBag.Title = "Thêm mới Loại điện thoại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Thêm Loại Điện Thoại</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+        <fieldset>
+            <span style="color:red">@ViewData["Error"]</span>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="TENLOAI">Tên Loại Điện Thoại:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="TENLOAI" name="TENLOAI" value="@ViewBag.TENLOAI" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm mới" class="btn btn-default" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}
+<div>
+     @Html.ActionLink("Quay lại", "danh_sach")
+</div>

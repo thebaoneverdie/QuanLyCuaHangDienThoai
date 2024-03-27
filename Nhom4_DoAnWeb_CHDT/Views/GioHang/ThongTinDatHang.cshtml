@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.Giohang>
+
+@{
+    ViewBag.Title = "Đặt hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Nhom4_DoAnWeb_CHDT.Models
+@{
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TAIKHOAN"];
+    Giohang gh = new Giohang();
+}
+<h2>Đặt hàng</h2>
+<table class="table">
+    <tr>
+        <th>
+            Tên điện thoại:
+        </th>
+        <th>
+            Hình:
+        </th>
+        <th>
+            Giá bán:
+        </th>
+        <th>
+            Số lượng:
+        </th>
+        <th>
+            Thành tiền:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tenDT)
+            </td>
+            <td>
+                <img src="@item.hinh" width="180" />
+            </td>
+            @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.maDT }))
+            {
+                if (tk.role == "QT")
+                {
+                    <td>
+                        @String.Format("{0:0:0}", item.gianhap) VNĐ
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isoluong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dTienNhap)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @String.Format("{0:0:0}", item.giaban) VNĐ
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isoluong)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dThanhtien)
+                    </td>
+                }
+
+            }
+        </tr>
+    }
+    <tr style="font-weight:bold; text-align:right; color:red">
+        <td colspan="3" id="sp">Số loại điện thoại: @ViewBag.Tongsoluongsanpham</td>
+        <td colspan="4" id="sa">Số lượng điện thoại: @ViewBag.Tongsoluong</td>
+        @if (tk.role == "QT")
+        {
+            <td colspan="5" id="tt">Tổng tiền: @String.Format("{0:0:0}", ViewBag.TongtienNhap) VNĐ</td>
+        }
+        else
+        {
+            <td colspan="5" id="tt">Tổng tiền: @String.Format("{0:0:0}", ViewBag.Tongtien) VNĐ</td>
+        }
+    </tr>
+    <tr style="font-weight: bold; text-align:right">
+        <td colspan="6">@Html.ActionLink("Trở về giỏ hàng", "GioHang", "GioHang")</td>
+    </tr>
+</table>
+<h2 style="text-align:center">Thông tin đặt hàng</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+    <fieldset>
+        @if (tk.role == "QT")
+        {
+            <div class="form-group">
+                <label class="control-label col-md-2" for="NHACUNGCAP">Nhà cung cấp:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("MANCC", (IEnumerable<SelectListItem>)ViewBag.NHACUNGCAP, "Select nhà cung cấp", new { @class = "form-control" })
+                </div>
+            </div>
+        }
+        else
+        {
+            <span style="color:red">@ViewData["Error"]</span>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="TENNV">Tên Khách Hàng:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="TENKH" name="TENKH" value="@ViewBag.TENKH" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="DIACHI">Địa chỉ:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="DIACHI" name="DIACHI" value="@ViewBag.DIACHI" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="DIENTHOAI">Điện thoại:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="DIENTHOAI" name="DIENTHOAI" value="@ViewBag.DIENTHOAI" />
+                </div>
+                <span style="color:red">@ViewData["SDTKhongHopLe"]</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="EMAIL">Email:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" id="EMAIL" name="EMAIL" value="@ViewBag.EMAIL" />
+                </div>
+                <span style="color:red">@ViewData["emailTonTai"]</span>
+                <span style="color:red">@ViewData["EmailKhongHopLe"]</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2" for="NGAYDAT">Ngày đặt:</label>
+                <div class="col-md-10">
+                    <input class="form-control" readonly type="text" id="NGAYDAT" name="NGAYDAT" value="@DateTime.Now.ToShortDateString()" />
+                </div>
+            </div>
+        }
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Xác nhận" class="btn btn-default" />
+            </div>
+        </div>
+
+    </fieldset>
+    </div>
+}

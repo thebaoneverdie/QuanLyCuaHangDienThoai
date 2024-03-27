@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblLOAIDIENTHOAI>
+@{
+    ViewBag.Title = "Tìm kiếm Loại điện thoại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Loại Điện Thoại cần tìm</h2>
+@using (Html.BeginForm("tim_kiem", "LoaiDT", FormMethod.Get))
+{
+    <p>
+        <input type="Text" class="form-control col-md-10 " name="searchName" placeholder="Nhập tên Loại Điện Thoại cần tìm">
+        <input type="submit" value="Tìm kiếm" class="btn btn-info" />
+    </p>
+}
+<table border="1px">
+    <tr>
+        <th width="100" style="text-align:center">Mã Loại ĐT</th>
+        <th width="30%" style="text-align:center">Tên Loại ĐT</th>
+        <th width="45%"></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">@item.MALOAI</td>
+            <td style="text-align:center">@item.TENLOAI</td>
+            <td style="text-align:center">
+                <a href="@Url.Action("sua_thong_tin", new { id = item.MALOAI })" title="Edit">
+                    <img src="~/Content/images/edit-icon.png" alt="Edit" width="20px" />
+                </a> |
+                <a href="@Url.Action("thong_tin", new { id = item.MALOAI })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Edit" width="24px" />
+                </a> |
+                <a href="@Url.Action("xoa_LoaiDT", new { id = item.MALOAI })" title="Delete">
+                    <img src="~/Content/images/delete-icon.png" alt="Edit" width="21px" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Quay lại", "danh_sach")

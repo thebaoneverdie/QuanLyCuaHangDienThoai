@@ -1,0 +1,572 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblDIENTHOAI
+@using System.Globalization;
+@{
+    ViewBag.Title = "Thông tin điện thoại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- Product main img -->
+            <div class="col-md-5 col-md-push-2">
+                <div id="product-main-img">
+                    <img src="@Model.HINH" width="60%" />
+                </div>
+            </div>
+            <!-- /Product main img -->
+            <!-- Product thumb imgs -->
+            <!-- /Product thumb imgs -->
+            <!-- Product details -->
+            <div class="col-md-5">
+                <div class="product-details">
+                    <h2 class="product-name"> @Html.DisplayFor(model => model.TENDT)</h2>
+                    <div>
+                        <h3 class="product-price">
+                            @{
+                                var formattedValue = Model.GIABAN.ToString("C");
+                            }
+                            @Html.DisplayFor(_ => formattedValue)
+                        </h3>
+
+                    </div>
+                    <p>@Html.DisplayFor(model => model.MOTA)</p>
+
+                    <div class="product-options">
+
+                    </div>
+
+                    <div class="add-to-cart">
+                        <a class="btn btn-default" style="width:30%;margin-right:20px" href="@Url.Action("trang_chu", "KhoaiTei")">Quay lại</a>
+
+                        <a style="margin-bottom = 100px; padding-top: 8px;" class="btn add-to-cart-btn" href="@Url.Action("ThemGioHang", "Giohang",
+new { @id = Model.MADT, @strUrl = Request.Url.ToString() })"><i class="fa fa-shopping-cart"></i>Đặt mua</a>
+                    </div>
+                    <br />
+                    <p style="font-size:16px">
+                        <span><img src="~/Content/images/uytin.jpg" width="30px"></span>
+                        Hàng chính hãng - Bảo hành 12 Tháng
+                        <span><img src="~/Content/images/ship.jpg" width="30px"></span>
+                        Giao hàng toàn quốc
+                    </p>
+                </div>
+            </div>
+            <!-- /Product details -->
+            <!-- Product tab -->
+            <div class="col-md-12">
+
+                <div class="col-md-12">
+                    <div id="product-tab">
+                        <!-- product tab nav -->
+                        <ul class="tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
+
+                            <li><a data-toggle="tab" href="#tab3">Đánh giá (3)</a></li>
+                        </ul>
+                        <!-- /product tab nav -->
+                        <!-- product tab content -->
+                        <div class="tab-content">
+                            <!-- tab1  -->
+                            <div id="tab1" class="tab-pane fade in active">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>@Html.DisplayFor(model => model.MOTA)</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tab1  -->
+                            <!-- tab2  -->
+                            <div id="tab2" class="tab-pane fade in">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /tab2  -->
+                            <!-- tab3  -->
+                            <div id="tab3" class="tab-pane fade in">
+                                <div class="row">
+                                    <!-- Rating -->
+                                    <div class="col-md-3">
+                                        <div id="rating">
+                                            <div class="rating-avg">
+                                                <span>4.5</span>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <ul class="rating">
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 80%;"></div>
+                                                    </div>
+                                                    <span class="sum">3</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div style="width: 60%;"></div>
+                                                    </div>
+                                                    <span class="sum">2</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                                <li>
+                                                    <div class="rating-stars">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                        <i class="fa fa-star-o"></i>
+                                                    </div>
+                                                    <div class="rating-progress">
+                                                        <div></div>
+                                                    </div>
+                                                    <span class="sum">0</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /Rating -->
+                                    <!-- Reviews -->
+                                    <div class="col-md-6">
+                                        <div id="reviews">
+                                            <ul class="reviews">
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="review-heading">
+                                                        <h5 class="name">John</h5>
+                                                        <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                        <div class="review-rating">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star-o empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-body">
+                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <ul class="reviews-pagination">
+                                                <li class="active">1</li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /Reviews -->
+                                    <!-- Review Form -->
+                                    <div class="col-md-3">
+                                        <div id="review-form">
+                                            <form class="review-form">
+                                                <input class="input" type="text" placeholder="Your Name">
+                                                <input class="input" type="email" placeholder="Your Email">
+                                                <textarea class="input" placeholder="Your Review"></textarea>
+                                                <div class="input-rating">
+                                                    <span>Your Rating: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                        <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                        <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                        <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                        <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                    </div>
+                                                </div>
+                                                <button class="primary-btn">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /Review Form -->
+                                </div>
+                            </div>
+                            <!-- /tab3  -->
+                        </div>
+                        <!-- /product tab content  -->
+                    </div>
+                </div>
+                </ul>
+                <!-- /product tab nav -->
+                <!-- product tab content -->
+                <div class="tab-content">
+                    <!-- tab1  -->
+                    <div id="tab1" class="tab-pane fade in active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p> .</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /tab1  -->
+                    <!-- tab2  -->
+                    <div id="tab2" class="tab-pane fade in">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p></p>
+                            </div>
+                        </div>
+                        <!-- /tab2  -->
+                        <!-- tab3  -->
+                        <div id="tab3" class="tab-pane fade in">
+                            <div class="row">
+                                <!-- Rating -->
+                                <div class="col-md-3">
+                                    <div id="rating">
+                                        <div class="rating-avg">
+                                            <span>4.5</span>
+                                            <div class="rating-stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                        </div>
+                                        <ul class="rating">
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: 80%;"></div>
+                                                </div>
+                                                <span class="sum">3</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div style="width: 60%;"></div>
+                                                </div>
+                                                <span class="sum">2</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div></div>
+                                                </div>
+                                                <span class="sum">0</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div></div>
+                                                </div>
+                                                <span class="sum">0</span>
+                                            </li>
+                                            <li>
+                                                <div class="rating-stars">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <div class="rating-progress">
+                                                    <div></div>
+                                                </div>
+                                                <span class="sum">0</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Rating -->
+                                <!-- Reviews -->
+                                <div class="col-md-6">
+                                    <div id="reviews">
+                                        <ul class="reviews">
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">John</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">John</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="review-heading">
+                                                    <h5 class="name">John</h5>
+                                                    <p class="date">27 DEC 2018, 8:0 PM</p>
+                                                    <div class="review-rating">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="reviews-pagination">
+                                            <li class="active">1</li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- /Reviews -->
+                                <!-- Review Form -->
+                                <div class="col-md-3">
+                                    <div id="review-form">
+                                        <form class="review-form">
+                                            <input class="input" type="text" placeholder="Your Name">
+                                            <input class="input" type="email" placeholder="Your Email">
+                                            <textarea class="input" placeholder="Your Review"></textarea>
+                                            <div class="input-rating">
+                                                <span>Your Rating: </span>
+                                                <div class="stars">
+                                                    <input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+                                                    <input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+                                                    <input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+                                                    <input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+                                                    <input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /Review Form -->
+                            </div>
+                        </div>
+                        <!-- /tab3  -->
+                    </div>
+                    <!-- /product tab content  -->
+                </div>
+            </div>
+            <!-- /product tab -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+<!-- FOOTER -->
+<!--<footer id="footer">-->
+<!-- top footer -->
+<!--<div class="section">-->
+<!-- container -->
+<!--<div class="container">-->
+<!-- row -->
+<!--<div class="row">
+    <div class="col-md-3 col-xs-6">
+        <div class="footer">
+            <h3 class="footer-title">About Us</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+            <ul class="footer-links">
+                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
+                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+        <div class="footer">
+            <h3 class="footer-title">Categories</h3>
+            <ul class="footer-links">
+                <li><a href="#">Hot deals</a></li>
+                <li><a href="#">Laptops</a></li>
+                <li><a href="#">Smartphones</a></li>
+                <li><a href="#">Cameras</a></li>
+                <li><a href="#">Accessories</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="clearfix visible-xs"></div>
+
+    <div class="col-md-3 col-xs-6">
+        <div class="footer">
+            <h3 class="footer-title">Information</h3>
+            <ul class="footer-links">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Orders and Returns</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-xs-6">
+        <div class="footer">
+            <h3 class="footer-title">Service</h3>
+            <ul class="footer-links">
+                <li><a href="#">My Account</a></li>
+                <li><a href="#">View Cart</a></li>
+                <li><a href="#">Wishlist</a></li>
+                <li><a href="#">Track My Order</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+    </div>
+</div>-->
+<!-- /row -->
+<!--</div>-->
+<!-- /container -->
+<!--</div>-->
+<!-- /top footer -->
+<!-- bottom footer -->
+<!--</footer>-->
+<!-- /NEWSLETTER -->
+@*<h2>Thông tin Điện Thoại</h2>
+
+    <div>
+        <hr />
+        <h2 style="text-decoration:underline">
+            @Html.DisplayFor(model => model.TENDT)
+        </h2>
+        <div class="thongtin" style="display:flex">
+            <div class="left" style="width:60%">
+
+                <img src="@Model.HINH" width="60%" />
+            </div>
+            <div class="right" style="width:40%; margin-top: 5%">
+                <h4 style="color:orangered; font-size:30px"> @Html.DisplayFor(model => model.GIABAN)</h4>
+                <p style="font-size:18px"> @Html.DisplayFor(model => model.MOTA)</p>
+                <div class="button" style="display:flex">
+                    <a class="btn btn-default" style="width:30%;margin-right:20px" href="@Url.Action("trang_chu", "KhoaiTei")">Quay lại</a>
+
+                    <a class="btn btn-success" style="width:60%" href="@Url.Action("ThemGioHang", "Giohang",
+                                        new { @id = @Model.MADT, @strUrl = Request.Url.ToString() })">Đặt mua</a>
+                </div>
+            </div>
+        </div>
+        <br />
+        <p style="font-size:16px">
+            <span><img src="~/Content/images/uytin.jpg" width="30px"></span>
+            Hàng chính hãng - Bảo hành 12 Tháng
+            <span><img src="~/Content/images/ship.jpg" width="30px"></span>
+            Giao hàng toàn quốc
+        </p>
+    </div>*@

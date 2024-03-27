@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblHOADON>
+@{
+    ViewBag.Title = "Thống kê";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thống kê hóa đơn bán hàng</h2>
+<form method="get" action="@Url.Action("ThongKe","HoaDon")">
+    <div>
+        <label for="start-date">Ngày bắt đầu:</label>
+        <input type="date" id="start-date" name="start-date" value="@ViewBag.StartDate?.ToString(" yyyy-MM-dd")" required>
+    </div>
+    <div>
+        <label for="end-date">Ngày kết thúc:</label>
+        <input type="date" id="end-date" name="end-date" value="@ViewBag.EndDate?.ToString(" yyyy-MM-dd")" required>
+    </div>
+    <button value="date" type="submit">Thống kê</button>
+</form>
+
+<table class="table">
+    <tr>
+        <th>
+            Tên khách hàng:
+        </th>
+        <th>
+            Ngày lập:
+        </th>
+        <th>
+            Tổng trị giá:
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.tblKHACHHANG.TENKH
+            </td>
+            <td>
+                @item.NGAYLAP
+            </td>
+            <td>
+                @item.TONGTG
+            </td>
+        </tr>
+    }
+    <tr>
+        <th>Tổng doanh thu</th>
+        <td>@ViewBag.TotalRevenue</td>
+    </tr>
+
+</table>
+
+

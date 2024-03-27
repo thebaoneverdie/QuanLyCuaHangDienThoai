@@ -1,0 +1,80 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblDIENTHOAI
+
+@{
+    ViewBag.Title = "Xóa điện thoại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa điện thoại</h2>
+
+<h3>Chắc chắn muốn xóa điện thoại này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENDT)
+        </dd>
+
+        <dt>
+            Hình:
+        </dt>
+
+        <dd>
+            <img src="@Model.HINH" width="400px" />
+        </dd>
+
+        <dt>
+            Giá mua:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIAMUA)
+        </dd>
+
+        <dt>
+            Giá bán:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GIABAN)
+        </dd>
+
+        <dt>
+            Mô tả:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOTA)
+        </dd>
+
+        <dt>
+            Mã loại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MALOAI)
+        </dd>
+
+        <dt>
+            Số lượng tồn:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SLTON)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "danh_sach_QT","DienThoai")
+        </div>
+    }
+</div>

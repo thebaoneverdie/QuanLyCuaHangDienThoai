@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblDIENTHOAI>
+@using System.Globalization;
+@{
+    ViewBag.Title = "Khoaitei Shop - Trang chủ";
+}
+<link rel="stylesheet" href="~/Content/style.css" />
+<div class="banner">
+    <div class="banner__left">
+        <a href="@Url.Action("thong_tin", "DienThoai", new {id = 2 })">
+            <img src="~/Content/images/banner-1.jpg" alt="banner">
+
+        </a>
+    </div>
+    <div class="banner__right">
+        <a href="@Url.Action("thong_tin", "DienThoai", new {id = 37 })">
+            <img src="~/Content/images/banner-3.jpg" alt="banner">
+        </a>
+        <a href="@Url.Action("thong_tin", "DienThoai", new {id = 14 })">
+            <img src="~/Content/images/banner-2.jpg" alt="banner" class="banner__last">
+        </a>
+    </div>
+</div>
+<div class="row">
+    @{var dt_random = Model.Where(m => m.MADT % 7 == 0); }
+    @{var four_dt_random = dt_random.Take(4); }
+    <div class="title-sp">
+        <h2>ĐIỆN THOẠI NỔI BẬT</h2>
+        @*  <a class="more" href="#>">Xem thêm</a>*@
+    </div>
+    <br />
+    @foreach (var item in four_dt_random)
+    {
+        var gia = item.GIABAN.ToString().Replace(",0000", "");
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    <img src="@item.HINH" alt="hinh thumnail" width="214px" height="214px">
+                </div>
+                <div class="panel-body">
+                    @item.TENDT
+                    <p>
+                        <strong>Giá: </strong>@{
+                            var formattedValue = item.GIABAN.ToString("C");
+                        }
+                        @Html.DisplayFor(_ => formattedValue)
+                    </p>
+                    <p><strong>Số lượng tồn: </strong>@item.SLTON</p>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right">
+                        <a style="background-color:red" class="btn btn-success" href="@Url.Action("ThemGioHang", "Giohang",
+                            new { @id = item.MADT, @strUrl = Request.Url.ToString() })">Đặt mua</a>
+                    </div>
+                    <div class="pull-left">
+                        @Html.ActionLink("Thông tin", "thong_tin", "DienThoai", new { id = item.MADT }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    @{var dt_loai1 = Model.Where(m => m.MALOAI == 1); }
+    @{var four_dt_1 = dt_loai1.Take(4); }
+    <br />
+    <div class="title-sp">
+        <h2>Apple</h2>
+        <a class="pull-right more" href="@Url.Action("DienThoai", "DienThoai", new{ maloai = 1})">Xem thêm</a>
+    </div>
+    <br />
+    @foreach (var item in four_dt_1)
+    {
+        var gia = item.GIABAN;
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading" style="text-align:center">
+                    <img src="@item.HINH" alt="hinh thumnail" width="214px" height="214px">
+                </div>
+                <div class="panel-body">
+                    @item.TENDT
+                    <p><strong>Giá: </strong>@gia.ToString("C")</p>
+                    <p><strong>Số lượng tồn: </strong>@item.SLTON</p>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right">
+                        <a style="background-color:red" class="btn btn-success" href="@Url.Action("ThemGioHang", "Giohang",
+                              new {@id = item.MADT, @strUrl = Request.Url.ToString()})">Đặt mua</a>
+                    </div>
+                    <div class="pull-left">
+                        @Html.ActionLink("Thông tin", "thong_tin", "DienThoai", new { id = item.MADT }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    @{var dt_loai2 = Model.Where(m => m.MALOAI == 2); }
+    @{var four_dt_loai2 = dt_loai2.Take(4); }
+    <br />
+    <div class="title-sp">
+        <h2>SamSung</h2>
+        <a class="pull-right more" href="@Url.Action("DienThoai", "DienThoai", new{ maloai = 2})">Xem thêm</a>
+    </div>
+    <br />
+    @foreach (var item in four_dt_loai2)
+    {
+        var gia = item.GIABAN.ToString().Replace(",0000", "");
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel panel-heading">
+                    <img src="@item.HINH" alt="hinh thumnail" width="214px" height="214px">
+                </div>
+                <div class="panel-body">
+                    @item.TENDT
+                    <p><strong>Giá: </strong>@gia</p>
+                    <p><strong>Số lượng tồn: </strong>@item.SLTON</p>
+                </div>
+                <div class="panel-footer clearfix">
+                    <div class="pull-right">
+                        <a style="background-color:red" class="btn btn-success" href="@Url.Action("ThemGioHang", "Giohang",
+                              new {@id = item.MADT, @strUrl = Request.Url.ToString()})">Đặt mua</a>
+                    </div>
+                    <div class="pull-left">
+                        @Html.ActionLink("Thông tin", "thong_tin", "DienThoai", new { id = item.MADT }, new { @class = "btn btn-default" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

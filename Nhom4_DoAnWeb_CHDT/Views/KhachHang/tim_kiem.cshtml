@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblKHACHHANG>
+@{
+    ViewBag.Title = "Tìm kiếm Khách Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Khách Hàng cần tìm</h2>
+@using (Html.BeginForm("tim_kiem", "KhachHang", FormMethod.Get))
+{
+    <p>
+        <input type="Text" class="form-control col-md-10 " name="searchName" placeholder="Nhập tên Khách Hàng cần tìm">
+        <input type="submit" value="Search" class="btn btn-info" />
+    </p>
+}
+@using Nhom4_DoAnWeb_CHDT.Models
+@{ 
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TAIKHOAN"];
+}
+<table border="1px">
+    <tr>
+        <th width="130" style="text-align:center">Mã Khách Hàng</th>
+        <th width="150" style="text-align:center">Tên Khách Hàng</th>
+        <th width="230" style="text-align:center">Địa chỉ</th>
+        <th width="100" style="text-align:center">Điện Thoại</th>
+        <th width="190" style="text-align:center">Email</th>
+        <th width="160"></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">@item.MAKH</td>
+            <td style="text-align:center">@item.TENKH</td>
+            <td style="text-align:center">@item.DIACHI</td>
+            <td style="text-align:center">@item.DIENTHOAI</td>
+            <td style="text-align:center">@item.EMAIL</td>
+            <td style="text-align:center">
+                <a href="@Url.Action("sua_thong_tin", new { id = item.MAKH })" title="Edit">
+                    <img src="~/Content/images/edit-icon.png" alt="Edit" width="20px" />
+                </a> |
+                <a href="@Url.Action("thong_tin", new { id = item.MAKH })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Edit" width="24px" />
+                </a>
+                @if(tk.role == "QT")
+                {
+                    <a href="@Url.Action("xoa_KH", new { id = item.MAKH })" title="Delete">
+                       | <img src="~/Content/images/delete-icon.png" alt="Edit" width="21px" />
+                    </a>
+                }
+                
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Quay lại", "danh_sach")

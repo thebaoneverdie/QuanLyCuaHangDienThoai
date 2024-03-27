@@ -1,0 +1,16 @@
+﻿@model List<Nhom4_DoAnWeb_CHDT.Models.tblLOAIDIENTHOAI>
+
+
+
+
+
+@foreach (var item in Model)
+{
+    <ul>
+        @Html.ActionLink(item.TENLOAI, "HienThiTheoLoaiDienThoai", "DienThoai", new { id = item.MALOAI }, new { @class = "btn btn-default" })
+    </ul>
+}
+
+
+
+

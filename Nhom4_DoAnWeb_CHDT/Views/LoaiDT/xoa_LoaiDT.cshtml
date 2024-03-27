@@ -1,0 +1,33 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblLOAIDIENTHOAI
+
+@{
+    ViewBag.Title = "Xóa Loại điện thoại";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa Loại Điện Thoại</h2>
+
+<h3>Chắc chắn muốn xóa Loại Điện Thoại này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Loại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENLOAI)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Xóa" class="btn btn-default" style="margin:10px 20px"/>
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Quay lại", "danh_sach")
+</div>

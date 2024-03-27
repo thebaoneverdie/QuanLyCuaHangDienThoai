@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<Nhom4_DoAnWeb_CHDT.Models.tblNHAPKHO>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Nhập kho";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Danh sách các Phiếu nhập kho</h2>
+<hr />
+@using Nhom4_DoAnWeb_CHDT.Models
+@{
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+}
+<table border="1px">
+    <tr>
+        <th width="100" style="text-align:center">Mã phiếu nhập kho</th>
+        <th width="120" style="text-align:center">Ngày nhập</th>
+        <th width="80" style="text-align:center">Tổng tiền</th>
+        <th width="120" style="text-align:center">Mã nhà cung cấp</th>
+        <th width="120" style="text-align:center">Mã nhân viên</th>
+        <th width="180" style="text-align:center">Danh mục</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">@item.MAPNK</td>
+            <td style="text-align:center">@item.NGAYNHAP</td>
+            <td style="text-align:center">@item.TONGTG</td>
+            <td style="text-align:center">@item.MANCC</td>
+            <td style="text-align:center">@item.MANV</td>
+            <td style="text-align:center; font-size:24px">
+                <a href="@Url.Action("thong_tin", new { id = item.MAPNK })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Detail" width="29px" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /  @Model.PageCount
+    </div>
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("danh_sach_NK", "NhapKho", new
+        {
+            page = page
+        }))
+    </div>
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>

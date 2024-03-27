@@ -1,0 +1,57 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblKHACHHANG
+
+@{
+    ViewBag.Title = "Xóa Khách Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa Khách Hàng</h2>
+
+<h3>Chắc chắn muốn xóa Khách Hàng này?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Khách Hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENKH)
+        </dd>
+
+        <dt>
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+
+        <dt>
+            Điện thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIENTHOAI)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại", "danh_sach")
+        </div>
+    }
+</div>

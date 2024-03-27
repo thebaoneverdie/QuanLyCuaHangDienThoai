@@ -1,0 +1,50 @@
+﻿@model Nhom4_DoAnWeb_CHDT.Models.tblNHACUNGCAP
+
+@{
+    ViewBag.Title = "Thông tin Nhà cung cấp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin Nhà Cung Cấp</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên Nhà Cung Cấp:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TENNCC)
+        </dd>
+
+        <dt>
+            Địa chỉ:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIACHI)
+        </dd>
+
+        <dt>
+            Điện Thoại:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DIENTHOAI)
+        </dd>
+
+        <dt>
+            Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMAIL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Quay lại", "danh_sach") |
+    @Html.ActionLink("Sửa Nhà cung cấp", "sua_thong_tin", new {id = Model.MANCC })
+</p>

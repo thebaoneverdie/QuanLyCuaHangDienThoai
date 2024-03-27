@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Nhom4_DoAnWeb_CHDT.Models.tblNHANVIEN>
+@{
+    ViewBag.Title = "Tìm kiếm nhân viên";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Nhân Viên cần tìm</h2>
+@using (Html.BeginForm("tim_kiem", "NhanVien", FormMethod.Get))
+{
+    <p>
+        <input type="Text" class="form-control col-md-10 " name="searchName" placeholder="Nhập tên Nhân Viên cần tìm">
+        <input type="submit" value="Tìm kiếm" class="btn btn-info" />
+    </p>
+}
+<table border="1px">
+    <tr>
+        <th width="130" style="text-align:center">Mã Nhân Viên</th>
+        <th width="150" style="text-align:center">Tên Nhân Viên</th>
+        <th width="230" style="text-align:center">Địa chỉ</th>
+        <th width="100" style="text-align:center">Điện Thoại</th>
+        <th width="190" style="text-align:center">Email</th>
+        <th width="160"></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">@item.MANV</td>
+            <td style="text-align:center">@item.TENNV</td>
+            <td style="text-align:center">@item.DIACHI</td>
+            <td style="text-align:center">@item.DIENTHOAI</td>
+            <td style="text-align:center">@item.EMAIL</td>
+            <td style="text-align:center">
+                <a href="@Url.Action("sua_thong_tin", new { id = item.MANV })" title="Edit">
+                    <img src="~/Content/images/edit-icon.png" alt="Edit" width="20px" />
+                </a> |
+                <a href="@Url.Action("thong_tin", new { id = item.MANV })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Edit" width="24px" />
+                </a> |
+                <a href="@Url.Action("xoa_nhan_vien", new { id = item.MANV })" title="Delete">
+                    <img src="~/Content/images/delete-icon.png" alt="Edit" width="21px" />
+                </a>
+            </td>
+        </tr>
+    }
+</table>
+@Html.ActionLink("Quay lại", "danh_sach")

@@ -1,0 +1,120 @@
+﻿@model PagedList.IPagedList<Nhom4_DoAnWeb_CHDT.Models.tblKHACHHANG>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách Khách Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Nhom4_DoAnWeb_CHDT.Models
+@{ 
+    tblTAIKHOAN tk = (tblTAIKHOAN)Session["TaiKhoan"];
+}
+<h2>Danh Sách Khách Hàng</h2>
+<p>
+    @Html.ActionLink("Thêm Khách Hàng mới", "them_moi", null, new { @class = "btn btn-warning" })
+</p>
+@using (Html.BeginForm("tim_kiem", "KhachHang", FormMethod.Get))
+{
+    <p>
+        <input type="Text" class="form-control col-md-10 " name="searchName" placeholder="Nhập tên Khách Hàng cần tìm">
+        <input type="submit" value="Search" class="btn btn-info" />
+    </p>
+}
+<table border="1px">
+    <tr>
+        <th width="130" style="text-align:center">Mã Khách Hàng</th>
+        <th width="150" style="text-align:center">Tên Khách Hàng</th>
+        <th width="230" style="text-align:center">Địa chỉ</th>
+        <th width="100" style="text-align:center">Điện Thoại</th>
+        <th width="190" style="text-align:center">Email</th>
+        <th width="160" style="text-align:center">Công cụ</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="text-align:center">@item.MAKH</td>
+            <td style="text-align:center">@item.TENKH</td>
+            <td style="text-align:center">@item.DIACHI</td>
+            <td style="text-align:center">@item.DIENTHOAI</td>
+            <td style="text-align:center">@item.EMAIL</td>
+            <td style="text-align:center; font-size:24px">
+                <a href="@Url.Action("sua_thong_tin", new { id = item.MAKH })" title="Edit">
+                    <img src="~/Content/images/edit-icon.png" alt="Edit" width="22px" />
+                </a> |
+                <a href="@Url.Action("thong_tin", new { id = item.MAKH })" title="Detail">
+                    <img src="~/Content/images/detail-icon.png" alt="Detail" width="29px" />
+                </a>
+                @if(tk.role == "QT")
+                {
+                    
+                    <a href = "@Url.Action("xoa_KH", new { id = item.MAKH })" title = "Delete">
+                      |  <img src="~/Content/images/delete-icon.png" alt = "Delete" width="25px"/>
+                    </a >
+                }
+            </td>
+        </tr>
+    }
+</table>
+<div>
+    <div>
+        Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) /  @Model.PageCount
+    </div>
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("danh_sach", "KhachHang", new
+   {
+       page = page
+   }))
+    </div>
+</div>
+<style>
+    a:hover img {
+        position: relative;
+        top: -3px;
+    }
+
+    img {
+        vertical-align: text-bottom;
+    }
+
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+<style type="text/css">
+    #mau-nut a {
+        clear: both;
+        background-color: orange;
+        color: snow;
+    }
+
+        #mau-nut a:hover {
+            background-color: darkcyan;
+            color: snow;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var maxLength = 100;
+        $(".show-read-more").each(function () {
+            var myStr = $(this).text();
+            if ($.trim(myStr).length > maxLength) {
+                var newStr = myStr.substring(0, maxLength);
+                var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                $(this).empty().html(newStr);
+
+                $(this).append(' <a href="javascript:void(0);" class="read-more">đọc tiếp...</a>');
+
+                $(this).append('<span class="more-text">' + removedStr + '</span>');
+            }
+        });
+        $(".read-more").click(function () {
+            $(this).siblings(".more-text").contents().unwrap();
+            $(this).remove();
+        });
+    });
+</script>
+<style>
+    .show-read-more .more-text {
+        display: none;
+    }
+</style>
